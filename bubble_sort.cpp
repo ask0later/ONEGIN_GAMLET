@@ -24,6 +24,7 @@ int main()
             }
         }
     }
+    //spsi
     PrintArray(array);
 }
 
