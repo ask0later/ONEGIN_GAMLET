@@ -10,11 +10,6 @@ void Print_Pointer(char** ptr_to_nline, TEXT data)
         exit(errno);
     }
 
-    /*printf("%s: Trying to print\n", __PRETTY_FUNCTION__);
-    int result = fprintf(output, "Printed smth\n");
-    printf("%s: Print result: %d\n", __PRETTY_FUNCTION__, result);*/
-
-    fprintf(output, "%s\n", *(ptr_to_nline + 100));
     for (size_t counter = 0; counter < data.nline; counter++)
     {
         fprintf(output, "%s\n", *(ptr_to_nline + counter));
@@ -51,7 +46,6 @@ TEXT Reading_From_File(TEXT data)
 
 TEXT Splitting_Into_Lines(TEXT data)
 {
-    printf("ABOBA\n");
     size_t size_text = 0;
     for (size_t counter = 0; counter < data.sizebuf; counter++)
     {
@@ -64,11 +58,14 @@ TEXT Splitting_Into_Lines(TEXT data)
         {
             size_text ++;
         }
-        *(data.buffer + counter) = toupper(*(data.buffer + counter));
+        else
+        {
+            *(data.buffer + counter) = toupper(*(data.buffer + counter));
+        }
     }
 
-    data.text = (char**)calloc(size_text, sizeof(char*));
-    printf("ABOBA1\n");
+    data.text = (char**)calloc(size_text + 1, sizeof(char*));
+
     *(data.text + 0) = data.buffer + 0;
 
     for(size_t counter = 0; counter < data.sizebuf; counter++)
@@ -76,11 +73,11 @@ TEXT Splitting_Into_Lines(TEXT data)
         if(*(data.buffer + counter) == '\n')
         {
             *(data.buffer + counter) = '\0';
-            data.nline++;
             *(data.text + data.nline) = data.buffer + counter + 1;
+            data.nline++;
         }
     }
-    printf("@@@@@@@%s\n", *(data.text + 223));
+
     return data;
 }
 
