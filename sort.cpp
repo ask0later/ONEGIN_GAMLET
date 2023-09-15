@@ -1,6 +1,6 @@
 #include "sort.h"
 
-
+/*
 TEXT BubbleSort(TEXT data)
 {
     for (size_t outpass = 0; outpass < data.nline - 1; outpass++)
@@ -14,36 +14,43 @@ TEXT BubbleSort(TEXT data)
         }
     }
     return data;
-}
+}*/
 
 
 
-
-/*
-size_t** q_sort(TEXT data, int first, int last)
+void q_sort(char** ptr_to_nline, int low, int top)
 {
-    if (first < last)
+    if (low >= top)
     {
-        int left = first, right = last, middle = (data.text + (left + right) / 2);
-        do
-        {
-            while (array[left] < middle)
-                left++;
-            while (array[right] > middle)
-                right--;
-            if (left <= right)
+        return;
+    }
+
+    int left = low, right = top;
+    int middle = (left + right) / 2;
+    char* pivot = ptr_to_nline[middle];
+
+    do
+    {
+        while (strcmp(ptr_to_nline[left], pivot) < 0)
             {
-                Swap(array, left, right);
                 left++;
+            }
+        while (strcmp(ptr_to_nline[right], pivot) > 0)
+            {
                 right--;
             }
-        } while (left <= right);
-        printf("l = %d, r = %d\n", left, right);
-        qsort(array, first, right);
-        qsort(array, left, last);
-    }
+        if (left <= right)
+        {
+            Swap_Pointer(ptr_to_nline, left, right);
+            left++;
+            right--;
+        }
+
+    } while (left < right);
+
+    q_sort(ptr_to_nline, low, right);
+    q_sort(ptr_to_nline, left, top);
 }
-*/
 
 
 int Strcmp(char* arg1, char* arg2)
@@ -53,11 +60,11 @@ int Strcmp(char* arg1, char* arg2)
 
     while (*arg1)
     {
-        if (!isupper(*arg1))
+        if (!IsAlpha(*arg1))
         {
             arg1++;
         }
-        if (!isupper(*arg2))
+        if (!IsAlpha(*arg2))
         {
             arg2++;
         }
@@ -73,16 +80,12 @@ int Strcmp(char* arg1, char* arg2)
     return *(const unsigned char*)arg1 - *(const unsigned char*)arg2;
 }
 
-void Swap_Pointer(char** arg1, char** arg2)
+void Swap_Pointer(char** ptr, int left, int right)
 {
-    assert(arg1);
-    assert(arg2);
+    assert(ptr);
 
-    char* tmp = {};
-    tmp = *arg1;
-    *arg1 = *arg2;
-    *arg2 = tmp;
-    /*tmp = data.text[inpass];
-    data.text[inpass] = data.text[inpass + 1];
-    data.text[inpass + 1] = tmp;*/
+    char *tmp = {};
+    tmp = ptr[left];
+    ptr[left] = ptr[right];
+    ptr[right] = tmp;
 }

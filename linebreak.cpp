@@ -20,7 +20,7 @@ void DestroyStruct(TEXT* data)
     free(data -> buffer);
 }
 
-void Print_Pointer(TEXT data)
+void Print_Pointer(char** ptr, TEXT data)
 {
     FILE* output = fopen("oneginOut.txt", "w");
     if (output == NULL)
@@ -28,10 +28,10 @@ void Print_Pointer(TEXT data)
         perror("ERROR:");
         exit(errno);
     }
-    fprintf(output, "ABOBA\n");
+
     for (size_t counter = 0; counter < data.nline; counter++)
     {
-        fprintf(output, "line %2d : %s\n", counter + 1, data.text[counter]);
+        fprintf(output, "line %2d : %s\n", counter + 1, *(ptr + counter));
     }
     fclose(output);
 }
@@ -92,4 +92,12 @@ TEXT Splitting_Into_Lines(TEXT data)
     }
 
     return data;
+}
+
+bool IsAlpha(int arg)
+{
+    if ((65 <= arg) && (arg <= 90))
+        return 1;
+    else
+        return 0;
 }

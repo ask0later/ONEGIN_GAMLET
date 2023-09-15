@@ -16,11 +16,12 @@ struct TEXT
 
 const size_t SIZE_TEXT = 50;
 
-TEXT Splitting_Into_Lines(TEXT data);
 TEXT recalloc(TEXT data, size_t numRealloc);
 size_t Buffer_Size();
 
 TEXT Splitting_Into_Lines(TEXT data);
 TEXT Reading_From_File(TEXT data);
-void Print_Pointer(TEXT data);
+void Print_Pointer(char** ptr, TEXT data);
 void DestroyStruct(TEXT* data);
+
+bool IsAlpha(int arg);

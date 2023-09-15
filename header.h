@@ -18,14 +18,14 @@ const size_t SIZE_TEXT = 50;
 
 
 TEXT BubbleSort(TEXT data);
-//size_t** q_sort(TEXT data, int first, int last);
+void q_sort(char** ptr_to_nline, int first, int last);
 
 
 
 TEXT Splitting_Into_Lines(TEXT data);
 TEXT Reading_From_File(TEXT data);
 
-void Print_Pointer(TEXT data);
+void Print_Pointer(char** ptr, TEXT data);
 
 size_t Buffer_Size();
 void DestroyStruct(TEXT* data);

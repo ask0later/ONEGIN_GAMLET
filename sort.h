@@ -16,6 +16,8 @@ struct TEXT
 const size_t SIZE_TEXT = 50;
 
 TEXT BubbleSort(TEXT data);
-//size_t** q_sort(TEXT data, int first, int last);
+void q_sort(char** ptr_to_nline, int first, int last);
 int Strcmp(char* arg1, char* argv2);
-void Swap_Pointer(char** arg1, char** arg2);
+void Swap_Pointer(char** ptr, int left, int right);
+
+bool IsAlpha(int arg);
