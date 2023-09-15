@@ -1,26 +1,7 @@
 #include "linebreak.h"
 
-TEXT recalloc(TEXT data, size_t numRealloc)
-{
-    assert(&data);
-                                           // dataSize
-    data.text = (char**)realloc(data.text, numRealloc * SIZE_TEXT);
-    for (size_t j = numRealloc * SIZE_TEXT; j < (numRealloc + 1) * SIZE_TEXT; j++)
-    {//инициализирую память от text + k*SIZE до text + (k + 1)*SIZE
-        *(data.text + j) = NULL;
-    }
-    return data;
-}
 
-void DestroyStruct(TEXT* data)
-{
-    data -> nline = 0;
-    data -> sizebuf = 0;
-    free(data -> text);
-    free(data -> buffer);
-}
-
-void Print_Pointer(char** ptr, TEXT data)
+void Print_Pointer(char** ptr_to_nline, TEXT data)
 {
     FILE* output = fopen("oneginOut.txt", "w");
     if (output == NULL)
@@ -29,10 +10,16 @@ void Print_Pointer(char** ptr, TEXT data)
         exit(errno);
     }
 
+    /*printf("%s: Trying to print\n", __PRETTY_FUNCTION__);
+    int result = fprintf(output, "Printed smth\n");
+    printf("%s: Print result: %d\n", __PRETTY_FUNCTION__, result);*/
+
+    fprintf(output, "%s\n", *(ptr_to_nline + 100));
     for (size_t counter = 0; counter < data.nline; counter++)
     {
-        fprintf(output, "line %2d : %s\n", counter + 1, *(ptr + counter));
+        fprintf(output, "%s\n", *(ptr_to_nline + counter));
     }
+
     fclose(output);
 }
 
@@ -47,7 +34,7 @@ size_t Buffer_Size()
 
 TEXT Reading_From_File(TEXT data)
 {
-    assert(&data != NULL);
+    data.buffer = (char*)calloc(data.sizebuf, sizeof(char));
 
     FILE* input = fopen("onegin.txt", "r");
     if (input == NULL)
@@ -55,14 +42,8 @@ TEXT Reading_From_File(TEXT data)
         perror("ERROR:");
         exit(errno);
     }
-    data.text = (char**)calloc(SIZE_TEXT, sizeof(char*));
-
-    data.buffer = (char*)calloc(data.sizebuf, sizeof(char));
 
     fread((data.buffer), sizeof(char), (data.sizebuf), input); // копирование текста из файла в buffer
-
-    printf("size of file = %d\n", data.sizebuf);
-    //printf("%s",data.buffer);
 
     fclose(input);
     return data;
@@ -70,8 +51,8 @@ TEXT Reading_From_File(TEXT data)
 
 TEXT Splitting_Into_Lines(TEXT data)
 {
-    *(data.text + 0) = data.buffer + 0;
-
+    printf("ABOBA\n");
+    size_t size_text = 0;
     for (size_t counter = 0; counter < data.sizebuf; counter++)
     {
         if (*(data.buffer + counter) == '\r')
@@ -81,16 +62,25 @@ TEXT Splitting_Into_Lines(TEXT data)
 
         if (*(data.buffer + counter) == '\n')
         {
-            *(data.buffer + counter) = '\0';
-            *(data.text + data.nline) = data.buffer + counter + 1;
-            (data.nline) ++;
+            size_text ++;
         }
-        else
-        {
-            *(data.buffer + counter) = toupper(*(data.buffer + counter));
-        }
+        *(data.buffer + counter) = toupper(*(data.buffer + counter));
     }
 
+    data.text = (char**)calloc(size_text, sizeof(char*));
+    printf("ABOBA1\n");
+    *(data.text + 0) = data.buffer + 0;
+
+    for(size_t counter = 0; counter < data.sizebuf; counter++)
+    {
+        if(*(data.buffer + counter) == '\n')
+        {
+            *(data.buffer + counter) = '\0';
+            data.nline++;
+            *(data.text + data.nline) = data.buffer + counter + 1;
+        }
+    }
+    printf("@@@@@@@%s\n", *(data.text + 223));
     return data;
 }
 
@@ -100,4 +90,13 @@ bool IsAlpha(int arg)
         return 1;
     else
         return 0;
+}
+
+
+void DestroyStruct(TEXT* data)
+{
+    data -> nline = 0;
+    data -> sizebuf = 0;
+    free(data -> text);
+    free(data -> buffer);
 }

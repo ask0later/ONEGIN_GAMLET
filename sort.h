@@ -13,11 +13,15 @@ struct TEXT
     char* buffer;
 };
 
-const size_t SIZE_TEXT = 50;
+const size_t SIZE_TEXT = 512;
 
 TEXT BubbleSort(TEXT data);
-void q_sort(char** ptr_to_nline, int first, int last);
+void forward_quick_sort(char** ptr_to_nline, int low, int top);
+void backward_quick_sort(char** ptr_to_nline, int low, int top);
+
 int Strcmp(char* arg1, char* argv2);
+int backStrcmp(char* arg1, char* arg2);
+
 void Swap_Pointer(char** ptr, int left, int right);
 
 bool IsAlpha(int arg);

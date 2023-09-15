@@ -1,5 +1,6 @@
 TARGET = ONEGIN
 
+
 CFLAGS = -c -Wshadow -Winit-self -Wredundant-decls -Wcast-align \
  -Wundef -Wfloat-equal -Winline -Wunreachable-code -Wmissing-declarations \
  -Wmissing-include-dirs -Wswitch-enum -Wswitch-default -Weffc++ \
@@ -16,21 +17,21 @@ COMPILE = g++ -c $^ $(CFLAGS)
 all: $(TARGET)
 
 $(TARGET): main.o linebreak.o sort.o
-        @g++ $^ -o $(TARGET) $(CFLAGS)
+	@g++ $^ -o $(TARGET) $(CFLAGS)
 
 main.o: main.cpp
-        @$(COMPILE)
+	@$(COMPILE)
 
 linebreak.o: linebreak.cpp
-        @$(COMPILE)
+	@$(COMPILE)
 
 sort.o: sort.cpp
-        @$(COMPILE)
+	@$(COMPILE)
 
 .PHONY: clean
 
 clean:
-        rm -rf $(TARGET) *.o
-        rm -rf *.exe
+	rm -rf $(TARGET) *.o
+	rm -rf *.exe
 
 

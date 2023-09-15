@@ -14,18 +14,18 @@ struct TEXT
 };
 
 
-const size_t SIZE_TEXT = 50;
+const size_t SIZE_TEXT = 512;
 
 
 TEXT BubbleSort(TEXT data);
-void q_sort(char** ptr_to_nline, int first, int last);
-
+void forward_quick_sort(char** ptr_to_nline, int low, int top);
+void backward_quick_sort(char** ptr_to_nline, int low, int top);
 
 
 TEXT Splitting_Into_Lines(TEXT data);
 TEXT Reading_From_File(TEXT data);
 
-void Print_Pointer(char** ptr, TEXT data);
+void Print_Pointer(char** ptr_to_nline, TEXT data);
 
 size_t Buffer_Size();
 void DestroyStruct(TEXT* data);
