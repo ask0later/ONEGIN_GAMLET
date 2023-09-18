@@ -85,13 +85,14 @@ int backStrcmp(char* arg1, char* arg2)
 {
     assert(arg1);
     assert(arg2);
-    while (*arg1 != '\n')
+    while (*arg1 != '\0')
         arg1++;
-    while (*arg2 != '\n')
+    while (*arg2 != '\0')
         arg2++;
 
     arg1--;
     arg2--;
+
     while (*arg1)
     {
         if (!IsAlpha(*arg1))

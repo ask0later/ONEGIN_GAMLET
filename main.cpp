@@ -17,8 +17,8 @@ int main()
 
     //Print_Pointer(ptr_to_nline, data);
 
-    //quick_sort(ptr_to_nline, 0, data.nline - 1, &Strcmp);
-    //quick_sort(ptr_to_nline, 0, data.nline - 1, backStrcmp(char* arg1, char* argv2););
+    quick_sort(ptr_to_nline, 0, data.nline - 1, &Strcmp);
+    //quick_sort(ptr_to_nline, 0, data.nline - 1, &backStrcmp);
 
 
     Print_Pointer(ptr_to_nline, data);
