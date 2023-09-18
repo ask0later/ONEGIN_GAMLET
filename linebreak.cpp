@@ -76,7 +76,7 @@ void Splitting_Into_Lines(Text* data)
 
 bool IsAlpha(int arg)
 {
-    if (('A' <= arg) && ('Z' <= 90))
+    if (('A' <= arg) && (arg <= 'Z'))
         return 1;
     else
         return 0;
