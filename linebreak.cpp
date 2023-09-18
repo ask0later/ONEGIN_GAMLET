@@ -1,7 +1,7 @@
 #include "linebreak.h"
 
 
-void Print_Pointer(char** ptr_to_nline, TEXT data)
+void Print_Pointer(char** ptr_to_nline, Text data)
 {
     FILE* output = fopen("oneginOut.txt", "w");
     if (output == NULL)
@@ -27,23 +27,23 @@ size_t Buffer_Size()
     return (buff.st_size + 1);       // размер файла в байтах
 }
 
-void Reading_From_File(TEXT* data)
+void Reading_From_File(Text* data)
 {
     data->buffer = (char*)calloc(data->sizebuf, sizeof(char));
 
-    FILE* input = fopen("onegin.txt", "r");// rb or sizebuf = fread
+    FILE* input = fopen("onegin.txt", "rb");
     if (input == NULL)
     {
         perror("ERROR:");
-        exit(errno);//abort
+        exit(errno);
     }
 
     fread(data -> buffer, sizeof(char), data -> sizebuf, input); // копирование текста из файла в buffer
-    // check whether there is '\n' at the end of buffer
+
     fclose(input);
 }
 
-void Splitting_Into_Lines(TEXT* data)
+void Splitting_Into_Lines(Text* data)
 {
     size_t size_text = 0;
     for (size_t counter = 0; counter < data->sizebuf; counter++)
@@ -59,7 +59,7 @@ void Splitting_Into_Lines(TEXT* data)
         }
         else
         {
-            *(data->buffer + counter) = toupper(*(data->buffer + counter)); //?
+            *(data->buffer + counter) = (char) toupper(*(data->buffer + counter)); //?
         }
     }
 
@@ -87,7 +87,7 @@ bool IsAlpha(int arg)
 }
 
 
-void DestroyStruct(TEXT* data)
+void DestroyStruct(Text* data)
 {
     data -> nline = 0;
     data -> sizebuf = 0;

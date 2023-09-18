@@ -5,7 +5,7 @@
 #include <ctype.h>
 #include <assert.h>
 
-struct TEXT
+struct Text
 {
     size_t nline;
     char** text;
@@ -14,16 +14,15 @@ struct TEXT
 };
 
 
-const size_t SIZE_TEXT = 512;
 
 
 size_t Buffer_Size();
 
-void Splitting_Into_Lines(TEXT* data);
+void Splitting_Into_Lines(Text* data);
 
-void Reading_From_File(TEXT* data);
+void Reading_From_File(Text* data);
 
-void Print_Pointer(char** ptr_to_nline, TEXT data);
-void DestroyStruct(TEXT* data);
+void Print_Pointer(char** ptr_to_nline, Text data);
+void DestroyStruct(Text* data);
 
 bool IsAlpha(int arg);
