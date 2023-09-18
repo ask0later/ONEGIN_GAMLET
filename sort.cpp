@@ -1,22 +1,5 @@
 #include "sort.h"
 
-/*
-TEXT BubbleSort(TEXT data)
-{
-    for (size_t outpass = 0; outpass < data.nline - 1; outpass++)
-    {
-        for (size_t inpass = 0; inpass < data.nline - 1 - outpass; inpass++)
-        {
-            if (Strcmp(data.text[inpass], data.text[1 + inpass]) > 0)
-            {
-                Swap_Pointer(data.text + inpass, data.text + 1 + inpass);
-            }
-        }
-    }
-    return data;
-}*/
-
-
 void quick_sort(char** ptr_to_nline, int low, int top, int (*forward_or_back_strcmp) (char* s1, char* s2))
 {
     if (low >= top)
@@ -30,7 +13,6 @@ void quick_sort(char** ptr_to_nline, int low, int top, int (*forward_or_back_str
 
     do
     {
-        // while (func_ptr(ptr_to_nline[left], pivot))
         while (forward_or_back_strcmp(ptr_to_nline[left], pivot) < 0)
             {
                 left++;
@@ -61,16 +43,16 @@ int Strcmp(char* arg1, char* arg2)
 
     while (*arg1)
     {
-        if (!IsAlpha(*arg1))
+        if (!IsAlpha(toupper(*arg1)))
         {
             arg1++;
         }
-        if (!IsAlpha(*arg2))
+        if (!IsAlpha(toupper(*arg2)))
         {
             arg2++;
         }
 
-        if (*arg1 != *arg2)
+        if ((toupper(*arg1)) != (toupper(*arg2)))
         {
             break;
         }
@@ -78,7 +60,7 @@ int Strcmp(char* arg1, char* arg2)
         arg2++;
     }
 
-    return *(const unsigned char*)arg1 - *(const unsigned char*)arg2;
+    return (toupper(*arg1)) - (toupper(*arg2));
 }
 
 int backStrcmp(char* arg1, char* arg2)
@@ -95,16 +77,16 @@ int backStrcmp(char* arg1, char* arg2)
 
     while (*arg1)
     {
-        if (!IsAlpha(*arg1))
+        if (!IsAlpha(toupper(*arg1)))
         {
-            arg1--;
+            arg1++;
         }
-        if (!IsAlpha(*arg2))
+        if (!IsAlpha(toupper(*arg2)))
         {
-            arg2--;
+            arg2++;
         }
 
-        if (*arg1 != *arg2)
+        if ((toupper(*arg1)) != (toupper(*arg2)))
         {
             break;
         }
@@ -112,7 +94,7 @@ int backStrcmp(char* arg1, char* arg2)
         arg2--;
     }
 
-    return *(const unsigned char*)arg1 - *(const unsigned char*)arg2;
+    return (toupper(*arg1)) - (toupper(*arg2));
 }
 
 void Swap_Pointer(char** ptr, int left, int right)

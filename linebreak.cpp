@@ -57,10 +57,6 @@ void Splitting_Into_Lines(Text* data)
         {
             size_text++;
         }
-        else
-        {
-            *(data->buffer + counter) = (char) toupper(*(data->buffer + counter)); //?
-        }
     }
 
     data->text = (char**)calloc(size_text + 1, sizeof(char*));

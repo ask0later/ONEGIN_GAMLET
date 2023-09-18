@@ -1,20 +1,7 @@
-#include <stdio.h>
-#include <sys\stat.h>
-#include <cstdlib>
-#include <cstring>
-#include <ctype.h>
-#include <assert.h>
-
-struct Text
-{
-    size_t nline;
-    char** text;
-    size_t sizebuf;
-    char* buffer;
-};
+#include "directives.h"
 
 
-Text BubbleSort(Text data);
+
 void quick_sort(char** ptr_to_nline, int low, int top, int (*forward_or_back_strcmp) (char* s1, char* s2));
 
 int Strcmp(char* arg1, char* argv2);
