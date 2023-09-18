@@ -38,7 +38,7 @@ void Reading_From_File(Text* data)
         exit(errno);
     }
 
-    fread(data -> buffer, sizeof(char), data -> sizebuf, input); // копирование текста из файла в buffer
+    fread(data->buffer, sizeof(char), data->sizebuf, input); // копирование текста из файла в buffer
 
     fclose(input);
 }
@@ -55,7 +55,7 @@ void Splitting_Into_Lines(Text* data)
 
         if (*(data->buffer + counter) == '\n')
         {
-            size_text ++;
+            size_text++;
         }
         else
         {
@@ -80,7 +80,7 @@ void Splitting_Into_Lines(Text* data)
 
 bool IsAlpha(int arg)
 {
-    if ((65 <= arg) && (arg <= 90))
+    if (('A' <= arg) && ('Z' <= 90))
         return 1;
     else
         return 0;
