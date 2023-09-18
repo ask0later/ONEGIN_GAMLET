@@ -85,8 +85,8 @@ bool IsAlpha(int arg)
 
 void DestroyStruct(Text* data)
 {
-    data -> nline = 0;
-    data -> sizebuf = 0;
-    free(data -> text);
-    free(data -> buffer);
+    data->nline = 0;
+    data->sizebuf = 0;
+    free(data->text);
+    free(data->buffer);
 }
