@@ -3,6 +3,7 @@
 
 size_t Buffer_Size();
 
+
 void Splitting_Into_Lines(Text* data);
 
 void Reading_From_File(Text* data);
