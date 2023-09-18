@@ -19,9 +19,9 @@ const size_t SIZE_TEXT = 512;
 
 size_t Buffer_Size();
 
-TEXT Splitting_Into_Lines(TEXT data);
+void Splitting_Into_Lines(TEXT* data);
 
-TEXT Reading_From_File(TEXT data);
+void Reading_From_File(TEXT* data);
 
 void Print_Pointer(char** ptr_to_nline, TEXT data);
 void DestroyStruct(TEXT* data);

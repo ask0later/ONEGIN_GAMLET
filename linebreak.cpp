@@ -27,58 +27,55 @@ size_t Buffer_Size()
     return (buff.st_size + 1);       // размер файла в байтах
 }
 
-TEXT Reading_From_File(TEXT data)
+void Reading_From_File(TEXT* data)
 {
-    data.buffer = (char*)calloc(data.sizebuf, sizeof(char));
+    data->buffer = (char*)calloc(data->sizebuf, sizeof(char));
 
-    FILE* input = fopen("onegin.txt", "r");
+    FILE* input = fopen("onegin.txt", "r");// rb or sizebuf = fread
     if (input == NULL)
     {
         perror("ERROR:");
-        exit(errno);
+        exit(errno);//abort
     }
 
-    fread((data.buffer), sizeof(char), (data.sizebuf), input); // копирование текста из файла в buffer
-
+    fread(data -> buffer, sizeof(char), data -> sizebuf, input); // копирование текста из файла в buffer
+    // check whether there is '\n' at the end of buffer
     fclose(input);
-    return data;
 }
 
-TEXT Splitting_Into_Lines(TEXT data)
+void Splitting_Into_Lines(TEXT* data)
 {
     size_t size_text = 0;
-    for (size_t counter = 0; counter < data.sizebuf; counter++)
+    for (size_t counter = 0; counter < data->sizebuf; counter++)
     {
-        if (*(data.buffer + counter) == '\r')
+        if (*(data->buffer + counter) == '\r')
         {
-            *(data.buffer + counter) = '\0';
+            *(data->buffer + counter) = '\0';
         }
 
-        if (*(data.buffer + counter) == '\n')
+        if (*(data->buffer + counter) == '\n')
         {
             size_text ++;
         }
         else
         {
-            *(data.buffer + counter) = toupper(*(data.buffer + counter));
+            *(data->buffer + counter) = toupper(*(data->buffer + counter)); //?
         }
     }
 
-    data.text = (char**)calloc(size_text + 1, sizeof(char*));
+    data->text = (char**)calloc(size_text + 1, sizeof(char*));
 
-    *(data.text + 0) = data.buffer + 0;
+    *(data->text + 0) = data->buffer + 0;
 
-    for(size_t counter = 0; counter < data.sizebuf; counter++)
+    for (size_t counter = 0; counter < data->sizebuf; counter++)
     {
-        if(*(data.buffer + counter) == '\n')
+        if (*(data->buffer + counter) == '\n')
         {
-            *(data.buffer + counter) = '\0';
-            *(data.text + data.nline) = data.buffer + counter + 1;
-            data.nline++;
+            *(data->buffer + counter) = '\0';
+            *(data->text + data->nline) = data->buffer + counter + 1;
+            (data->nline)++;
         }
     }
-
-    return data;
 }
 
 bool IsAlpha(int arg)

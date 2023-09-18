@@ -17,8 +17,7 @@ TEXT BubbleSort(TEXT data)
 }*/
 
 
-
-void forward_quick_sort(char** ptr_to_nline, int low, int top)
+void quick_sort(char** ptr_to_nline, int low, int top, int (*forward_or_back_strcmp) (char* s1, char* s2))
 {
     if (low >= top)
     {
@@ -31,11 +30,12 @@ void forward_quick_sort(char** ptr_to_nline, int low, int top)
 
     do
     {
-        while (Strcmp(ptr_to_nline[left], pivot) < 0)
+        // while (func_ptr(ptr_to_nline[left], pivot))
+        while (forward_or_back_strcmp(ptr_to_nline[left], pivot) < 0)
             {
                 left++;
             }
-        while (Strcmp(ptr_to_nline[right], pivot) > 0)
+        while (forward_or_back_strcmp(ptr_to_nline[right], pivot) > 0)
             {
                 right--;
             }
@@ -48,44 +48,11 @@ void forward_quick_sort(char** ptr_to_nline, int low, int top)
 
     } while (left < right);
 
-    forward_quick_sort(ptr_to_nline, low, right);
-    forward_quick_sort(ptr_to_nline, left, top);
+    quick_sort(ptr_to_nline, low, right, forward_or_back_strcmp);
+    quick_sort(ptr_to_nline, left, top, forward_or_back_strcmp);
+
 }
 
-//change
-void backward_quick_sort(char** ptr_to_nline, int low, int top)
-{
-    if (low >= top)
-    {
-        return;
-    }
-
-    int left = low, right = top;
-    int middle = (left + right) / 2;
-    char* pivot = ptr_to_nline[middle];
-
-    do
-    {
-        while (backStrcmp(ptr_to_nline[left], pivot) < 0)
-            {
-                left++;
-            }
-        while (backStrcmp(ptr_to_nline[right], pivot) > 0)
-            {
-                right--;
-            }
-        if (left <= right)
-        {
-            Swap_Pointer(ptr_to_nline, left, right);
-            left++;
-            right--;
-        }
-
-    } while (left < right);
-
-    backward_quick_sort(ptr_to_nline, low, right);
-    backward_quick_sort(ptr_to_nline, left, top);
-}
 
 int Strcmp(char* arg1, char* arg2)
 {
@@ -114,16 +81,17 @@ int Strcmp(char* arg1, char* arg2)
     return *(const unsigned char*)arg1 - *(const unsigned char*)arg2;
 }
 
-//change
 int backStrcmp(char* arg1, char* arg2)
 {
     assert(arg1);
     assert(arg2);
-    if (*arg1 != '\n')
+    while (*arg1 != '\n')
         arg1++;
-    if (*arg2 != '\n')
+    while (*arg2 != '\n')
         arg2++;
 
+    arg1--;
+    arg2--;
     while (*arg1)
     {
         if (!IsAlpha(*arg1))

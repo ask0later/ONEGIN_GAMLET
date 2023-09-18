@@ -16,8 +16,8 @@ struct TEXT
 const size_t SIZE_TEXT = 512;
 
 TEXT BubbleSort(TEXT data);
-void forward_quick_sort(char** ptr_to_nline, int low, int top);
-void backward_quick_sort(char** ptr_to_nline, int low, int top);
+void quick_sort(char** ptr_to_nline, int low, int top, int (*forward_or_back_strcmp) (char* s1, char* s2));
+int forward_or_back_strcmp(char* s1, char* s2);
 
 int Strcmp(char* arg1, char* argv2);
 int backStrcmp(char* arg1, char* arg2);
